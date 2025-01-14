@@ -10,6 +10,7 @@ const Login = () => {
   const [password, setPassword] = useState("hello");
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [error, setError] = useState("");
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -22,12 +23,12 @@ const Login = () => {
         },
         { withCredentials: true }
       );
-      // console.log(res.data);
-      navigate("/Feed");
+      navigate("/");
       dispatch(addUser(res.data));
     } catch (err) {
+      setError(err.response.data);
       console.log(err);
-      alert("Login failed. Please check your credentials and try again.");
+      // alert("Login failed. Please check your credentials and try again.");
     }
   };
 
@@ -75,6 +76,7 @@ const Login = () => {
               required
             />
           </div>
+          <p className="text-red-500">{error}</p>
           <button
             type="submit"
             className="w-full bg-pink-500 hover:bg-pink-600 text-white font-semibold py-2 rounded-lg transition"
