@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const counterSlice = createSlice({
+const userSlice = createSlice({
   name: "user", // A unique name for the slice
   initialState: null, // Initial state
   reducers: {
@@ -14,7 +14,7 @@ const counterSlice = createSlice({
 });
 
 // Export actions for dispatch
-export const { addUser, removeUser } = counterSlice.actions;
+export const { addUser, removeUser } = userSlice.actions;
 
 // Export reducer to be added to the store
-export default counterSlice.reducer;
+export default userSlice.reducer;

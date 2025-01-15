@@ -4,10 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { BASE_URL } from "../utils/const";
 import { removeUser } from "../utils/userSlice";
+import { removeFeed } from "../utils/feedSlice";
 
 const Navbar = () => {
-  const user = useSelector((store) => store.user);
-  const dispatch = useDispatch();
+  const user = useSelector((store) => store.user); // Redux store se data access karne ke liye hai
+  const dispatch = useDispatch(); // Redux store mein bhejne ke liye hai.
   const navigate = useNavigate();
 
   const handleLogout = async () => {
@@ -16,6 +17,7 @@ const Navbar = () => {
         withCredentials: true,
       });
       dispatch(removeUser());
+      dispatch(removeFeed());
       return navigate("/login");
     } catch (err) {
       console.log(err);
