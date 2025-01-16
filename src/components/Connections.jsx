@@ -23,7 +23,6 @@ const Connections = () => {
   useEffect(() => {
     getConnection();
   }, []);
-
   if (!connection) return;
 
   return (
