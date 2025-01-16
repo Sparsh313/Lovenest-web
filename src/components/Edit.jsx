@@ -29,7 +29,7 @@ const EditProfile = () => {
         setShowToast(false);
       }, 3000);
     } catch (err) {
-      setError(err.response.data);
+      console.log(err);
     }
     console.log("Form submitted");
   };
@@ -37,7 +37,6 @@ const EditProfile = () => {
   const [bio, setBio] = useState(user?.bio);
   const [gender, setGender] = useState(user?.gender);
   const [age, setAge] = useState(user?.age);
-  const [error, setError] = useState("");
   const [showToast, setShowToast] = useState(false);
 
   // If the user data is not available, show a loading state
@@ -130,8 +129,6 @@ const EditProfile = () => {
                 rows="4"
               ></textarea>
             </div>
-
-            <p>{error}</p>
 
             {/* Submit Button */}
             <div className="flex justify-center">
