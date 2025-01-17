@@ -31,6 +31,8 @@
 
 13>See your Freinds/Connections
 
+14>See your follow request
+
 13>Create Feed page
 
 By mapping all users we can get all users data and we can use it accordingly

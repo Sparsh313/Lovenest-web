@@ -1,10 +1,6 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { addUser } from "../utils/userSlice";
-import axios from "axios";
-import { BASE_URL } from "../utils/const";
-import { retry } from "@reduxjs/toolkit/query";
 
 const Profile = () => {
   const user = useSelector((store) => store.user);
@@ -26,6 +22,7 @@ const Profile = () => {
               alt={`${user.name}'s user`}
               className="w-full h-60 object-cover"
             />
+
             <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
             <div className="absolute bottom-4 left-4">
               <h2 className="text-xl font-bold flex items-center">
