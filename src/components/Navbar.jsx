@@ -5,6 +5,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { BASE_URL } from "../utils/const";
 import { removeUser } from "../utils/userSlice";
 import { removeFeed } from "../utils/feedSlice";
+import { removeAllRequest, removeRequest } from "../utils/requestSlice";
+import { removeAllConnnection } from "../utils/connectionSlice";
 
 const Navbar = () => {
   const user = useSelector((store) => store.user); // Redux store se data access karne ke liye hai
@@ -18,6 +20,8 @@ const Navbar = () => {
       });
       dispatch(removeUser());
       dispatch(removeFeed());
+      dispatch(removeAllRequest());
+      dispatch(removeAllConnnection());
       return navigate("/login");
     } catch (err) {
       console.log(err);

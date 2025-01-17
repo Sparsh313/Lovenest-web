@@ -8,6 +8,7 @@ import Feed from "./components/feed";
 import Edit from "./components/Edit";
 import Connections from "./components/Connections";
 import Request from "./components/Request";
+import Signup from "./components/Signup";
 
 function App() {
   return (
@@ -16,13 +17,14 @@ function App() {
         <Router basename="/">
           <Routes>
             <Route path="/" element={<Body />}>
-              <Route path="/" element={<Feed />} />
+              <Route index element={<Feed />} />
               <Route path="/login" element={<Login />} />
               <Route path="/profile/view" element={<Profile />} />
               <Route path="/profile/edit" element={<Edit />} />
               <Route path="/connections" element={<Connections />} />
               <Route path="/request" element={<Request />} />
             </Route>
+            <Route path="/signup" element={<Signup />} />
           </Routes>
         </Router>
       </Provider>

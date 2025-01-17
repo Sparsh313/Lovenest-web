@@ -63,7 +63,6 @@ const EditProfile = () => {
                 name="name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                required
                 className="mt-1 p-2 w-full border border-gray-300 rounded-md"
               />
             </div>
@@ -82,7 +81,6 @@ const EditProfile = () => {
                 name="age"
                 value={age}
                 onChange={(e) => setAge(e.target.value)}
-                required
                 className="mt-1 p-2 w-full border border-gray-300 rounded-md"
               />
             </div>
@@ -100,12 +98,11 @@ const EditProfile = () => {
                 name="gender"
                 value={gender}
                 onChange={(e) => setGender(e.target.value)}
-                required
                 className="mt-1 p-2 w-full border border-gray-300 rounded-md"
               >
                 <option value="">{gender}</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
+                <option value="Male">male</option>
+                <option value="Female">female</option>
                 <option value="Other">Other</option>
               </select>
             </div>
@@ -123,7 +120,6 @@ const EditProfile = () => {
                 name="bio"
                 value={bio}
                 onChange={(e) => setBio(e.target.value)}
-                required
                 className="mt-1 p-2 w-full border border-gray-300 rounded-md"
                 rows="4"
               ></textarea>
