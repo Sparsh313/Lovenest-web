@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { BASE_URL } from "../utils/const";
 import { addUser } from "../utils/userSlice";
@@ -11,7 +11,6 @@ const EditProfile = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("Profile has been updated");
     try {
       const res = await axios.patch(
         BASE_URL + "/profile/edit",

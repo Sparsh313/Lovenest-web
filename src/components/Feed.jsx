@@ -16,7 +16,8 @@ const Feed = () => {
       const res = await axios.get(BASE_URL + "/user/feed", {
         withCredentials: true,
       });
-      dispatch(addfeed(res.data));
+      // console.log(res.data.feed);
+      dispatch(addfeed(res.data.feed));
     } catch (err) {
       console.log(err);
     }
@@ -25,11 +26,20 @@ const Feed = () => {
   useEffect(() => {
     getFeed();
   });
+  if (!feed) return;
 
+  if (feed.length <= 0)
+    return (
+      <div className="min-h-screen bg-gradient-to-b from-pink-100 via-pink-200 to-pink-300 flex flex-col items-center p-6">
+        <p className="text-gray-600 text-lg ">
+          No connections yet. Start exploring! 💕
+        </p>
+      </div>
+    );
   return (
     feed && (
-      <div className="">
-        <Card user={feed.feed} />
+      <div>
+        <Card user={feed} />
       </div>
     )
   );

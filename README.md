@@ -33,6 +33,9 @@
 
 14>See your follow request
 
-13>Create Feed page
+15>Accept/Reject connection
 
+16>Create Feed page
 By mapping all users we can get all users data and we can use it accordingly
+
+17>Right swipe or left swipe users

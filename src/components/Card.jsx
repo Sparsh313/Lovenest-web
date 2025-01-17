@@ -1,9 +1,30 @@
+import axios from "axios";
 import React from "react";
+import { BASE_URL } from "../utils/const";
+import { useDispatch } from "react-redux";
+import { removeUserFromFeed } from "../utils/feedSlice";
 
 // eslint-disable-next-line react/prop-types
 const Card = ({ user }) => {
+  const dispatch = useDispatch();
+  console.log(user);
+
+  const sendRequest = async (status, id) => {
+    try {
+      const res = await axios.post(
+        BASE_URL + "/request/send/" + status + `/${id}`,
+        {},
+        { withCredentials: true }
+      );
+      console.log(id);
+      dispatch(removeUserFromFeed(id));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
-    <div className="flex flex-col my-24 items-center bg-pink-100 p-6 min-h-screen relative">
+    <div className="min-h-screen bg-gradient-to-b from-pink-100 via-pink-200 to-pink-300 flex items-center justify-center">
       {user.map((profile, index) => (
         <div
           key={profile.id}
@@ -25,7 +46,8 @@ const Card = ({ user }) => {
           {/* Profile Info */}
           <div className="relative p-6 text-center">
             <h2 className="text-2xl font-bold text-black">
-              {profile.name}, {profile.age} ,{profile.gender.slice(0, 1)}
+              {profile.name.charAt(0).toUpperCase() + profile.name.slice(1)},{" "}
+              {profile.age} ,{profile.gender.slice(0, 1).toUpperCase()}
             </h2>
             <p className="text-gray-600 mt-2">{profile.bio}</p>
           </div>
@@ -34,23 +56,23 @@ const Card = ({ user }) => {
           {index === 0 && (
             <div className="flex justify-around p-4 bg-red-300 rounded-b-3xl">
               <button
-                // onClick={() => onPass(profile.id)}
-                className="flex items-center justify-center bg-pink-600 text-white w-14 h-10 rounded-lg shadow-md hover:bg-red-600 transition-transform transform hover:scale-110"
+                onClick={() => sendRequest("intrested", profile._id)}
+                className="bg-pink-500 hover:bg-pink-600 text-white font-semibold py-1 px-3 rounded-lg transition"
               >
-                <span className="material-icons">LIKE</span>
-              </button>
+                Like
+              </button>{" "}
               <button
-                // onClick={() => onLike(profile.id)}
-                className="flex items-center justify-center bg-black text-white w-14 h-10 rounded-lg shadow-lg transition-transform transform hover:scale-110"
+                onClick={() => sendRequest("ignored", profile._id)}
+                className="bg-slate-800 hover:bg-black text-white font-semibold py-1 px-3 rounded-lg transition"
               >
-                <span className="material-icons">DISLIKE</span>
-              </button>
+                Dislike
+              </button>{" "}
               <button
-                // onClick={() => onSuperLike(profile.id)}
-                className="flex items-center justify-center bg-slate-50 text-black w-14 h-10 rounded-lg shadow-inner transition-transform transform hover:scale-110"
+                onClick={() => sendRequest("intrested", profile._id)}
+                className="bg-red-400 hover:bg-red-600 text-white font-semibold py-1 px-3 rounded-lg transition"
               >
-                <span className="material-icons">STAR</span>
-              </button>
+                SuperLike
+              </button>{" "}
             </div>
           )}
         </div>

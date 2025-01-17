@@ -13,7 +13,7 @@ const Profile = () => {
 
   return (
     user && (
-      <div className="flex flex-col items-center my-40">
+      <div className="min-h-screen bg-gradient-to-b from-pink-100 via-pink-200 to-pink-300 flex items-center justify-center">
         <div className="bg-gray-900 text-white w-80 rounded-3xl shadow-xl overflow-hidden border border-gray-700">
           {/* Profile Picture */}
           <div className="relative">
