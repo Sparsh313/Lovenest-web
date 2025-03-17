@@ -9,6 +9,7 @@ import Edit from "./components/Edit";
 import Connections from "./components/Connections";
 import Request from "./components/Request";
 import Signup from "./components/Signup";
+import Chat from "./components/chat";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
               <Route path="/profile/edit" element={<Edit />} />
               <Route path="/connections" element={<Connections />} />
               <Route path="/request" element={<Request />} />
+              <Route path="/chat/:targetId" element={<Chat />} />
             </Route>
             <Route path="/signup" element={<Signup />} />
           </Routes>

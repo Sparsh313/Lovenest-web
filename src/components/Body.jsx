@@ -35,11 +35,13 @@ const Body = () => {
 
   return (
     <div>
-      <div className="flex flex-col min-h-screen" data-theme="valentine">
+      <div data-theme="dark">
         <Navbar />
-        <Outlet />
       </div>
-      <Footer />
+      <div>
+        <Outlet/>
+      </div>
+      {/* <Footer /> */}
     </div>
   );
 };

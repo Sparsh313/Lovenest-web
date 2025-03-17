@@ -8,7 +8,6 @@ const Card = ({ user }) => {
   const dispatch = useDispatch();
   const [swipeDirection, setSwipeDirection] = useState(null);
   const [isSwiping, setIsSwiping] = useState(false);
-  const [touchStartX, setTouchStartX] = useState(0);
 
   const sendRequest = async (status, id) => {
     try {
@@ -34,26 +33,6 @@ const Card = ({ user }) => {
     }, 300);
   };
 
-  const handleTouchStart = (e) => {
-    const touch = e.touches[0];
-    setTouchStartX(touch.clientX);
-  };
-
-  const handleTouchMove = (e) => {
-    const touch = e.touches[0];
-    const deltaX = touch.clientX - touchStartX;
-
-    if (Math.abs(deltaX) > 50) {
-      setSwipeDirection(deltaX > 0 ? "right" : "left");
-    }
-  };
-
-  const handleTouchEnd = (id) => {
-    if (swipeDirection) {
-      handleSwipe(swipeDirection, id);
-    }
-  };
-
   return (
     <div className="min-h-screen bg-gradient-to-b from-pink-100 via-pink-200 to-pink-300 flex items-center justify-center">
       {user.map((profile, index) => (
@@ -74,9 +53,7 @@ const Card = ({ user }) => {
                 : ""
               : ""
           }`}
-          onTouchStart={handleTouchStart}
-          onTouchMove={handleTouchMove}
-          onTouchEnd={() => handleTouchEnd(profile._id)}
+
         >
           {/* Profile Image with Heart Overlay */}
           <div className="relative">

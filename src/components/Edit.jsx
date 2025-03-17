@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { BASE_URL } from "../utils/const";
 import { addUser } from "../utils/userSlice";
+import LoadingSpinner from "./LoadingSpinner";
 import axios from "axios";
 
 const EditProfile = () => {
@@ -29,6 +30,8 @@ const EditProfile = () => {
       }, 3000);
     } catch (err) {
       console.log(err);
+    } finally {
+      setIsLoading(false);
     }
     console.log("Form submitted");
   };
@@ -37,11 +40,12 @@ const EditProfile = () => {
   const [gender, setGender] = useState(user?.gender);
   const [age, setAge] = useState(user?.age);
   const [showToast, setShowToast] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   // If the user data is not available, show a loading state
-  if (!user) {
-    return <div>Loading...</div>; // Or any loading indicator of your choice
-  }
+   if (!user) {
+     return <LoadingSpinner />;
+   }
 
   return (
     <>

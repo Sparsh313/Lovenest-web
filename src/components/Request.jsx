@@ -1,10 +1,12 @@
 import axios from "axios";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { BASE_URL } from "../utils/const";
 import { useDispatch, useSelector } from "react-redux";
+import LoadingSpinner from "./LoadingSpinner";
 import { addRequest, removeRequest } from "../utils/requestSlice";
 
 const Request = () => {
+  const [isLoading, setIsLoading] = useState(true);
   const dispatch = useDispatch();
   const request = useSelector((store) => store.request);
   console.log(request);
@@ -22,6 +24,7 @@ const Request = () => {
     } catch (err) {
       console.log(err);
     }
+  
   };
 
   const getRequest = async () => {
@@ -33,11 +36,18 @@ const Request = () => {
       dispatch(addRequest(res.data));
     } catch (err) {
       console.log(err);
+    } finally {
+      setIsLoading(false);
     }
   };
   useEffect(() => {
     getRequest();
   }, []);
+
+  if(isLoading){
+    return <LoadingSpinner/>
+  }
+
 
   if (!request) return;
 
