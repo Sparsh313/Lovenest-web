@@ -9,7 +9,7 @@ import Edit from "./components/Edit";
 import Connections from "./components/Connections";
 import Request from "./components/Request";
 import Signup from "./components/Signup";
-import Chat from "./components/chat";
+import Chat from "./components/Chat";
 
 function App() {
   return (
