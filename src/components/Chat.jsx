@@ -1,278 +1,35 @@
-// // import React, { useState, useEffect, useRef } from "react";
-// // import { useParams } from "react-router-dom";
-// // // import LoadingSpinner from "./LoadingSpinner"; // Import your LoadingSpinner component
-// // import { useSelector } from "react-redux";
-// // import { BASE_URL, createSocketConnections } from "../utils/const";
-// // import axios from "axios";
-// // // import { div } from "framer-motion/client";
-
-// // const Chat = () => {
-// //   const { targetId } = useParams();
-// //   // const [isLoading, setIsLoading] = useState(true);
-// //   const [messages, setMessages] = useState([]);
-// //   const [newMsg, setNewMsg] = useState("");
-// //   const user = useSelector((store) => store.user);
-// //   const userId = user?._id;
-// //   const userName = user?.name; // Current user's name
-// //   const messagesEndRef = useRef(null);
-
-// //   const fetchMsg = async () => {
-
-// //       const chat = await axios.get(BASE_URL + "/chat/" + targetId, {
-// //         withCredentials: true,
-// //       });
-// //       // Extract messages and map them to include userName from senderId.name
-// //       const chatMsg = chat?.data?.messages.map((msg) => {
-// //         return {
-// //           userName: msg.senderId.name, // Use senderId.name for the sender's name
-// //           text: msg.text,
-// //           // timestamp: msg.timestamp,
-// //           // senderId: msg.senderId._id, // Include senderId for comparison
-// //         };
-// //       });
-// //       setMessages(chatMsg);
-// //   };
-
-// //   useEffect(() => {
-// //     fetchMsg();
-// //   }, []);
-
-// //   useEffect(() => {
-// //     if (!userId) return;
-// //     const socket = createSocketConnections();
-
-// //     socket.emit("joinChat", { userName,userId, targetId });
-
-// //     socket.on("msgRecieved", ({ userName, text }) => {
-// //       setMessages((prevMessages) => [
-// //         ...prevMessages,
-// //         { text, userName, },
-// //       ]);
-// //     });
-
-// //     return () => {
-// //       socket.disconnect();
-// //     };
-// //   }, [userId, targetId]);
-
-// //   // useEffect(() => {
-// //   //   scrollToBottom();
-// //   // }, [messages]);
-
-// //   // const scrollToBottom = () => {
-// //   //   messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-// //   // };
-
-// //   const sendMessage = () => {
-// //     // e.preventDefault();
-// //     const socket = createSocketConnections();
-// //     socket.emit("sendMsg", {
-// //       userName: user?.name,
-// //       userId,
-// //       targetId,
-// //       text: newMsg,
-// //     });
-// //     setNewMsg("");
-// //   };
-
-// //   return (
-// //     <div className="min-h-screen flex flex-col">
-// //       <h1 className="p-5 border-b border-gray-600">Chat</h1>
-// //       <div className="flex-1 p-4 overflow-y-auto">
-// //         {messages.map((msg, index) => {
-// //           const isSender = userId === msg.senderId;
-// //            // Compare senderId with current userId
-// //           console.log(msg.userName, user.name, msg.senderId, targetId);
-// //           return (
-// //             <div
-// //               key={index}
-// //               className={`chat ${isSender ? "chat-end" : "chat-start"} `}
-// //             >
-// //               <div className="chat-header">
-// //                 {msg.userName}
-// //                 <time className="text-xs opacity-50"> 2 hrs ago</time>
-// //               </div>
-// //               <div className="chat-bubble">{msg.text}</div>
-// //               <div className="chat-footer opacity-50">Delivered</div>
-// //             </div>
-// //           );
-// //         })}
-// //         <div ref={messagesEndRef} />
-// //       </div>
-// //       {/* Input Area */}
-// //       <div className="bg-white p-4 shadow-md">
-// //         <div className="flex items-center space-x-2">
-// //           <form
-// //             onSubmit={sendMessage}
-// //             className="flex items-center space-x-2 w-full"
-// //           >
-// //             <input
-// //               value={newMsg}
-// //               onChange={(e) => setNewMsg(e.target.value)}
-// //               type="text"
-// //               placeholder="Type a message..."
-// //               className="flex-1 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
-// //             />
-// //             <button
-// //               type="submit"
-// //               className="p-2 bg-pink-600 text-white rounded-lg hover:bg-pink-700 transition shadow-md"
-// //             >
-// //               Send
-// //             </button>
-// //           </form>
-// //         </div>
-// //       </div>
-// //     </div>
-// //   );
-// // };
-
-// // export default Chat;
-
-// import { useEffect, useState } from "react";
-// import { useParams } from "react-router-dom";
-// import { createSocketConnection } from "../utils/socket";
-// import { useSelector } from "react-redux";
-// import axios from "axios";
-// import { BASE_URL } from "../utils/const";
-
-// const Chat = () => {
-//   const {targetUserId}  = useParams();
-//   const [messages, setMessages] = useState([]);
-//   const [newMessage, setNewMessage] = useState("");
-//   const user = useSelector((store) => store.user);
-//   const userId = user?._id;
-
-//   const fetchChatMessages = async () => {
-//     console.log(targetUserId)
-//     const chat = await axios.get(BASE_URL + "/chat/" + targetUserId, {
-//       withCredentials: true,
-//     });
-
-//     console.log(chat.data.messages);
-
-//     const chatMessages = chat?.data?.messages.map((msg) => {
-//       const { senderId, text } = msg;
-//       return {
-//         firstName: senderId?.firstName,
-//         lastName: senderId?.lastName,
-//         text,
-//       };
-//     });
-//     setMessages(chatMessages);
-//   };
-//   useEffect(() => {
-//     fetchChatMessages();
-//   }, []);
-
-//   useEffect(() => {
-//     if (!userId) {
-//       return;
-//     }
-//     const socket = createSocketConnection();
-//     // As soon as the page loaded, the socket connection is made and joinChat event is emitted
-//     socket.emit("joinChat", {
-//       firstName: user.firstName,
-//       userId,
-//       targetUserId,
-//     });
-
-//     socket.on("messageReceived", ({ firstName, lastName, text }) => {
-//       console.log(firstName + " :  " + text);
-//       setMessages((messages) => [...messages, { firstName, lastName, text }]);
-//     });
-
-//     return () => {
-//       socket.disconnect();
-//     };
-//   }, [userId, targetUserId]);
-
-//   const sendMessage = () => {
-//     const socket = createSocketConnection();
-//     socket.emit("sendMessage", {
-//       firstName: user.firstName,
-//       lastName: user.lastName,
-//       userId,
-//       targetUserId,
-//       text: newMessage,
-//     });
-//     setNewMessage("");
-//   };
-
-//   return (
-//     <div className="w-3/4 mx-auto border border-gray-600 m-5 h-[70vh] flex flex-col">
-//       <h1 className="p-5 border-b border-gray-600">Chat</h1>
-//       <div className="flex-1 overflow-scroll p-5">
-//         {messages.map((msg, index) => {
-//           return (
-//             <div
-//               key={index}
-//               className={
-//                 "chat " +
-//                 (user.firstName === msg.firstName ? "chat-end" : "chat-start")
-//               }
-//             >
-//               <div className="chat-header">
-//                 {`${msg.firstName}  ${msg.lastName}`}
-//                 <time className="text-xs opacity-50"> 2 hours ago</time>
-//               </div>
-//               <div className="chat-bubble">{msg.text}</div>
-//               <div className="chat-footer opacity-50">Seen</div>
-//             </div>
-//           );
-//         })}
-//       </div>
-//       <div className="p-5 border-t border-gray-600 flex items-center gap-2">
-//         <input
-//           value={newMessage}
-//           onChange={(e) => setNewMessage(e.target.value)}
-//           className="flex-1 border border-gray-500 text-white rounded p-2"
-//         ></input>
-//         <button onClick={sendMessage} className="btn btn-secondary">
-//           Send
-//         </button>
-//       </div>
-//     </div>
-//   );
-// };
-// export default Chat;
 
 import React, { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
-// import LoadingSpinner from "./LoadingSpinner"; // Import your LoadingSpinner component
 import { useSelector } from "react-redux";
-import { BASE_URL, createSocketConnections } from "../utils/const";
 import axios from "axios";
-import { div } from "framer-motion/client";
+import { BASE_URL, createSocketConnections } from "../utils/const";
 
 const Chat = () => {
+  const [targetUser, setTargetUser] = useState(null);
   const { targetId } = useParams();
-  // const [isLoading, setIsLoading] = useState(true);
   const [messages, setMessages] = useState([]);
   const [newMsg, setNewMsg] = useState("");
   const user = useSelector((store) => store.user);
   const userId = user?._id;
-  const userName = user?.name; // Current user's name
-  const messagesEndRef = useRef(null);
+  const userName = user?.name;
+  const scrollRef = useRef(null);
 
   const fetchMsg = async () => {
     try {
-      const chat = await axios.get(BASE_URL + "/chat/" + targetId, {
+      const res = await axios.get(BASE_URL + "/chat/" + targetId, {
         withCredentials: true,
       });
-      // Extract messages and map them to include userName from senderId.name
-      const chatMsg = chat?.data?.messages.map((msg) => {
-        return {
-          text: msg.text,
-          userName: msg.senderId.name, // Use senderId.name for the sender's name
-          timestamp: msg.timestamp,
-          senderId: msg.senderId._id, // Include senderId for comparison
-        };
-      });
-      setMessages(chatMsg);
-    } catch (error) {
-      console.error("Error fetching messages:", error);
-    } finally {
-      // setIsLoading(false);
+      console.log("Chat history payload:", res.data);
+      const chatMsgs = res?.data?.messages.map((msg) => ({
+        text: msg.text,
+        senderId: msg.senderId,
+      }));
+      const userData = res?.data?.targetUser;
+      setMessages(chatMsgs);
+      setTargetUser(userData);
+    } catch (err) {
+      console.error("Error fetching messages:", err);
     }
   };
 
@@ -281,90 +38,103 @@ const Chat = () => {
   }, [userId, targetId]);
 
   useEffect(() => {
-    const socket = createSocketConnections();
-
     if (!userId) return;
-    socket.emit("joinChat", { userId, targetId });
-
-    socket.on("msgRecieved", ({ userName, text, timestamp, senderId }) => {
-      setMessages((prevMessages) => [
-        ...prevMessages,
-        { text, userName, timestamp, senderId },
-      ]);
-    });
-
-    return () => {
-      socket.disconnect();
-    };
-  }, [userId, targetId]);
-
-  useEffect(() => {
-    scrollToBottom();
-  }, [messages]);
-
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
-
-  const sendMessage = (e) => {
-    e.preventDefault();
     const socket = createSocketConnections();
-    const newMessage = {
+
+    socket.emit("joinChat", {
       userName,
       userId,
       targetId,
+    });
+
+    socket.on("messageReceived", ({ text, senderId }) => {
+      setMessages((prev) => [...prev, { text, senderId }]);
+    });
+
+    return () => socket.disconnect();
+  }, [userId, targetId]);
+
+  useEffect(() => {
+    scrollRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
+
+  const sendMessage = (e) => {
+    e.preventDefault();
+    if (newMsg.trim() === "") return;
+
+    const socket = createSocketConnections();
+    socket.emit("sendMessage", {
+      name: user.firstName,
+      userId,
+      targetId,
       text: newMsg,
-    };
-    socket.emit("sendMsg", newMessage);
+    });
     setNewMsg("");
   };
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <h1 className="p-5 border-b border-gray-600">Chat</h1>
-      <div className="flex-1 p-4 overflow-y-auto">
+    <div className="max-w-3xl mx-auto flex flex-col h-[80vh] mt-6 border border-gray-300 rounded-lg overflow-hidden shadow-md">
+      {/* Header */}
+      <div className="bg-gray-800 text-white px-6 py-4 flex items-center gap-4">
+        {targetUser && (
+          <>
+            <img
+              src={targetUser.photo}
+              alt={targetUser.name}
+              className="w-10 h-10 rounded-full object-cover"
+            />
+            <span className="text-lg font-semibold">{targetUser.name}</span>
+          </>
+        )}
+      </div>
+
+      {/* Messages */}
+      <div className="flex-1 overflow-y-auto bg-gray-100 p-4 space-y-4">
         {messages.map((msg, index) => {
-          const isSender = userId === msg.senderId; // Compare senderId with current userId
-          console.log(msg.userName, user.name, msg.senderId, targetId);
+          const isSender = userId === msg.senderId;
+          console.log(`user:${userId} send to ${msg.senderId}`);
           return (
             <div
               key={index}
-              className={`chat ${isSender ? "chat-end" : "chat-start"} `}
+              className={`flex ${isSender ? "justify-end" : "justify-start"}`}
             >
-              <div className="chat-header">
-                {msg.userName}
-                <time className="text-xs opacity-50"> 2 hrs ago</time>
+              <div
+                className={`max-w-[70%] px-4 py-2 rounded-2xl ${
+                  isSender
+                    ? "bg-blue-500 text-white rounded-br-none"
+                    : "bg-white text-gray-900 border rounded-bl-none"
+                } shadow`}
+              >
+                <div className="text-sm font-semibold mb-1">
+                  {msg.firstName} {msg.lastName || ""}
+                </div>
+                <div>{msg.text}</div>
               </div>
-              <div className="chat-bubble">{msg.text}</div>
-              <div className="chat-footer opacity-50">Delivered</div>
             </div>
           );
         })}
-        <div ref={messagesEndRef} />
+        <div ref={scrollRef} />
       </div>
-      {/* Input Area */}
-      <div className="bg-white p-4 shadow-md">
-        <div className="flex items-center space-x-2">
-          <form
-            onSubmit={sendMessage}
-            className="flex items-center space-x-2 w-full"
-          >
-            <input
-              value={newMsg}
-              onChange={(e) => setNewMsg(e.target.value)}
-              type="text"
-              placeholder="Type a message..."
-              className="flex-1 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
-            />
-            <button
-              type="submit"
-              className="p-2 bg-pink-600 text-white rounded-lg hover:bg-pink-700 transition shadow-md"
-            >
-              Send
-            </button>
-          </form>
-        </div>
-      </div>
+
+      {/* Input */}
+      <form
+        onSubmit={sendMessage}
+        className="flex p-4 border-t bg-white gap-2 items-center"
+      >
+        <input
+          type="text"
+          value={newMsg}
+          onChange={(e) => setNewMsg(e.target.value)}
+          placeholder="Type your message..."
+          className="flex-1 px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-400"
+        />
+        <button
+          type="submit"
+          className="bg-blue-500 text-white px-5 py-2 rounded-full hover:bg-blue-600"
+        >
+          Send
+        </button>
+      </form>
     </div>
   );
 };
