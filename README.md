@@ -1,41 +1,60 @@
-# dev tinder web
+## 💖 LOVE-NEST — Frontend (React)
 
-1>create Vite
-2>install Tailwind
-3>Use DaisyUI
-4>intsall react-router-dom
-5>Create a home page using Routing "/" and use [Parent-Children__Routing]
-6>Install cors and axios
-7>Write login component and handle [authorization]
+LOVE-NEST is a modern, Tinder-inspired web application built with the MERN stack. This is the **frontend** repository, developed using **React.js**, **Tailwind CSS**, **Socket.IO**, and a component-based architecture for real-time social interactions.
 
-\*\* 8>To set cookie in web
+## 🧱 Tech Stack
 
-> we need to add origin and credentials in backend
-> withcredentials : true in frontend
+- **Frontend Framework:** React.js (Vite)
+- **Styling:** Tailwind CSS
+- **Real-time:** Socket.IO client
+- **Routing:** React Router DOM
+- **State Management:** Context API (or Redux)
+- **Auth:** JWT (JSON Web Tokens)
+- **Build Tool:** Vite
 
-9>Install react-redux toolkit
-=> configureStore
-=> createSlice
 
-10>Login and see if data is coming properly
-11>NAVBAR should update as soon as user Log in (conditional rendering (&&))
+## 📸 Screenshots
 
-12>Create Profile page
+🚀 Features
 
-> take user from store and if user exist useEffect to show user
+- 🎯 **Preference-Based Feed** — Displays profiles based on gender preferences and omits already friended or requested users.
+- 💌 **Friend Request System** — Send, cancel, and accept requests with dynamic UI updates.
+- 💬 **Real-Time Chat** — Bi-directional messaging powered by Socket.IO for seamless communication.
+- 🔐 **JWT Authentication** — Login/signup and route protection via JWT tokens.
+- ⚛️ **Global State Handling** — Easily extendable via Redux or Context API.
+- 📱 **Responsive Design** — Optimized for desktop and mobile screens.
 
-13>Edit profile
+## 📁 Project Structure
 
-> Make sure to use Conditional rendering otherwise on NULL it will show error
-> show Toast meg on saving profile
+src/
+├── components/ # Reusable UI components
+├── utils/ # Socket connections, constants
+│ └── const.js # BASE_URL and Socket.IO setup
+├── App.jsx # Main app wrapper with routes
+├── main.jsx # Entry point for React
+├── index.css # Tailwind base styles
 
-13>See your Freinds/Connections
+## ⚙️ Setup Instructions
 
-14>See your follow request
+### 1. Clone the Repo
+git clone https://github.com/yourusername/love-nest-frontend.git
+cd dev-tinder-web
 
-15>Accept/Reject connection
+### 2. Install Dependencies
+-npm install
 
-16>Create Feed page
-By mapping all users we can get all users data and we can use it accordingly
+# 3. Environment Variables 
+-VITE_API_URL=http://localhost:7777
+-VITE_SOCKET_URL=http://localhost:7777
 
-17>Right swipe or left swipe users
+#  Run the Development Server
+npm run dev
+
+# 📬 Contact
+
+👤 Author: Sparsh singh
+🔗 GitHub: @Sparsh313
+🔗 Linkedin:https://www.linkedin.com/in/sparsh-singh-895320253/
+
+
+
