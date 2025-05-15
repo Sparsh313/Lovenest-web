@@ -1,7 +1,8 @@
-export const BASE_URL = "http://localhost:7777";
-  location.hostname === "localhost" ? "http://localhost:7777" : "/api";
+export const BASE_URL =
+  location.hostname === "localhost"
+    ? "http://localhost:7777"
+    : "https://lovenest-production.up.railway.app";
 
-  
 import io from "socket.io-client";
 
 export const createSocketConnections = () => {
