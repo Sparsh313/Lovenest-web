@@ -57,7 +57,7 @@ src/
 
 ### 1. Clone the Repo
 
-git clone https://github.com/yourusername/love-nest-frontend.git
+git clone https://github.com/Sparsh313/Lovenest-web.git
 cd dev-tinder-web
 
 ### 2. Install Dependencies
