@@ -53,7 +53,6 @@ const Card = ({ user }) => {
                 : ""
               : ""
           }`}
-
         >
           {/* Profile Image with Heart Overlay */}
           <div className="relative">
