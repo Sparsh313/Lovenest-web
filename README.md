@@ -12,8 +12,27 @@ LOVE-NEST is a modern, Tinder-inspired web application built with the MERN stack
 - **Auth:** JWT (JSON Web Tokens)
 - **Build Tool:** Vite
 
-
 ## 📸 Screenshots
+
+### 🔐 Login Page
+
+![Login Page](./src/asset/screenshot/Login.png)
+
+### Feed
+
+![Feed](./src/asset/screenshot/Feed.png)
+
+### 🧑‍🤝‍🧑 Profile
+
+![Profile ](./src/asset/screenshot/profile.png)
+
+### Follow Request
+
+![Request ](./src/asset/screenshot/Folllow-req.png)
+
+### 🧑 Connesctions
+
+![Connections ](./src/asset/screenshot/Connections.png)
 
 🚀 Features
 
@@ -37,17 +56,21 @@ src/
 ## ⚙️ Setup Instructions
 
 ### 1. Clone the Repo
+
 git clone https://github.com/yourusername/love-nest-frontend.git
 cd dev-tinder-web
 
 ### 2. Install Dependencies
+
 -npm install
 
-# 3. Environment Variables 
+# 3. Environment Variables
+
 -VITE_API_URL=http://localhost:7777
 -VITE_SOCKET_URL=http://localhost:7777
 
-#  Run the Development Server
+# Run the Development Server
+
 npm run dev
 
 # 📬 Contact
@@ -55,6 +78,3 @@ npm run dev
 👤 Author: Sparsh singh
 🔗 GitHub: @Sparsh313
 🔗 Linkedin:https://www.linkedin.com/in/sparsh-singh-895320253/
-
-
-
